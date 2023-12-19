@@ -1,11 +1,11 @@
-'use client'
-import React, { useState } from 'react'
+"use client";
+import React, { useState } from "react";
 import { useContext } from "react";
-import { PostContext } from '@/context/PostContext';
-import styles from './posts.module.css';
+import { PostContext } from "@/context/PostContext";
+import styles from "./posts.module.css";
 
 const Posts = () => {
-  const {posts, addPost, editPost, deletePost} = useContext(PostContext);
+  const { posts, addPost, editPost, deletePost } = useContext(PostContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [postId, setPostId] = useState(null);
@@ -14,7 +14,7 @@ const Posts = () => {
   const handleAddPost = (e) => {
     e.preventDefault();
 
-    if(!title && !description) return;
+    if (!title && !description) return;
 
     const newPost = {
       id: Date.now(),
@@ -23,8 +23,8 @@ const Posts = () => {
     };
     addPost(newPost);
 
-    setTitle('');
-    setDescription('');
+    setTitle("");
+    setDescription("");
   };
 
   const handleRemovePost = (postId) => {
@@ -43,7 +43,7 @@ const Posts = () => {
   const handleEditPost = (e) => {
     e.preventDefault();
 
-    if(!title && !description) return;
+    if (!title && !description) return;
 
     const updatedPost = {
       id: postId,
@@ -54,11 +54,10 @@ const Posts = () => {
     console.log(updatedPost.id, updatedPost);
     editPost(updatedPost.id, updatedPost);
 
-    setTitle('');
-    setDescription('');
+    setTitle("");
+    setDescription("");
     setIsEdit(false);
   };
-
 
   return (
     <div className={styles.container}>
@@ -76,7 +75,10 @@ const Posts = () => {
           className={styles.input}
           onChange={(e) => setDescription(e.target.value)}
         ></textarea>
-        <button className={styles.button} onClick={isEdit ? handleEditPost : handleAddPost}>
+        <button
+          className={styles.button}
+          onClick={isEdit ? handleEditPost : handleAddPost}
+        >
           {isEdit ? "Edit Post" : "Add New Post"}
         </button>
       </form>
@@ -98,14 +100,13 @@ const Posts = () => {
             >
               Delete
             </button>
-           
           </div>
         ))
       ) : (
         <p>No posts found.</p>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Posts
+export default Posts;
